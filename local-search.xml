@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>自律的const</title>
+    <link href="/2022/11/20/%E8%87%AA%E5%BE%8B%E7%9A%84const/"/>
+    <url>/2022/11/20/%E8%87%AA%E5%BE%8B%E7%9A%84const/</url>
+    
+    <content type="html"><![CDATA[<ul><li><p>const修饰符用于定义一些不能被修改的对象。被定义为const的对象不能被修改，const变量不能被重新赋值，const指针不能修改所指的对象。</p></li><li><p>对于有关被定义为const对象的操作很复杂。但是只需记住一个原则：不能让被声明为const的对象有被修改的可能性。<br>举个指针的例子：</p><p><code>const int a = 1； int* b = &amp;a；</code></p><p>上面的第二行操作就是非法的。原因在于：a已经被声明为const，因此不能有修改a值的行为，但是第二行用普通指针指向a，这个普通指针b提供了修改a的可能性。这是违反原则的，因此编译器不会允许通过。<br>反过来说，如果把指针b也声明为const，这两行代码就是正确的。（const指针不允许对指向对象的修改操作，因此，用const指针指向const对象是合法的——这样做并不会提供修改const对象的可能性）</p><p>对于引用，这个原则同样适用。你不能使用普通引用来指向const对象，但可以使用const引用来这么做。例如下面三行代码。<br>const int a &#x3D; 1；    &#x2F;&#x2F;a被定义为const，因此不能修改<br>const int &amp; b &#x3D; a；&#x2F;&#x2F;正确，受限的const引用b并不提供修改a的机会<br>int&amp; c &#x3D; a；             &#x2F;&#x2F;错误，不受限制的引用c提供了修改a的可能性<br>​</p></li><li><p>另一方面，你可以用const指针或引用来指向非const对象。<br><code>int a = 42；      //自由的a</code><br><code>​const int&amp; b = a；//正确</code><br><code>const int* c = a； //正确</code><br>无法通过b和c修改a的值，但是这三行代码可以通过编译。<br>​</p></li><li><p>顶层const和底层const<br>顶层const指的是，指针本身不能被改变；底层const指的是指针所指对象不能被改变。<br>前面所说的const指针，指的都是底层const。<br>两种const声明方法如下：<br><code>​int a = 42；</code><br><code>​const int* b = a；//不能通过指针b修改a的值；（底层const）</code><br><code>int * const c = a；//指针c自身不能修改，也就是永远只能指向a；（顶层const）</code><br>​<br>可以同时赋予指针顶层和底层const属性<br><code>​int a = 42；</code><br><code>​const int* const b =  a；//b只能指向a，同时，不能通过b修改a的值；</code><br>​</p><p>const也可以修饰引用。和指针不同，引用自身天生是不能被修改的（引用没有办法改变自己指向的对象），因此可以说引用自带顶层const属性。<br>​当然也可以为引用附加底层const，即声明一个不能修改对象的引用。<br><code>int a = 42；</code><br><code>​const int &amp; b = a；//无法通过引用b修改a的值；</code><br>​</p></li><li><p>const对象必须初始化<br>被声明为const的变量是不能被赋值的，因此，它必须要被初始化。一旦初始化后就无法改变它的值。<br>​</p></li><li><p>const对象仅在文件内有效（不是很理解）<br>const对象仅在定义了它的文件中生效。不同文件中的相同const其实都算作不同的对象。<br>如果要让const对象在不同文件间共享，则需要在所有文件的对应对象的声明和定义之前都加上extern关键字<br>​</p></li><li><p>constexpr：修饰的变量在编译阶段就能确定，且运行期间保持不变。<br>我的理解是，用constexpr修饰的变量，必须能从阅读代码的过程中确定它的值。<br>​因此，像下面这样的声明是错误的：<br><code>int a = 1；</code><br><code>...                                       //此处省略一堆代码</code><br><code>​constexpr int b = a；//错误，程序没有运行前，你不能确定a的值</code><br>即便我们为上面的a加上const声明，仍然是错误的。因为，虽然const能保证此值不变化，但不能保证这个值的初始值固定，例如：<br><code>int  a；</code><br><code>cin &gt;&gt; a；</code><br><code>const int b = a；         //声明了const变量b</code><br><code>constexpr int c = b；//错误，程序运行前，你不能确定b的值</code><br>​</p></li><li></li></ul>]]></content>
+    
+    
+    
+    <tags>
+      
+      <tag>c++基础</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>c++指针和引用符号基础用法</title>
     <link href="/2022/11/20/c-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/"/>
     <url>/2022/11/20/c-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/</url>
