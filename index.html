@@ -74,7 +74,7 @@
     <article id="post-指针引用符号初探" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2022/11/20/%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%88%9D%E6%8E%A2/" class="article-date">
-  <time class="dt-published" datetime="2022-11-20T07:20:59.941Z" itemprop="datePublished">2022-11-20</time>
+  <time class="dt-published" datetime="2022-11-20T07:27:09.943Z" itemprop="datePublished">2022-11-20</time>
 </a>
     
   </div>
@@ -94,7 +94,10 @@
 <ul>
 <li>PS：对象和对象指针是两个不同的概念。</li>
 </ul>
-<p>A a &#x3D; new A；这个语句会声明一个叫a的A对象，而A* a &#x3D; new A；则会声明一个指向A对象的对象指针a。</p>
+<p>A a &#x3D; new A；这个语句会声明一个叫a的A对象，而</p>
+<pre><code>A\* a = new A；
+</code></pre>
+<p>则会声明一个指向A对象的对象指针a。</p>
 <p>对他们二者的访问手段也不同。对于对象，用a.variable和a.func（）来调用a的成员变量和成员函数。</p>
 <p> 对于对象指针，用a-&gt;variable和a-&gt;func（）来调用。（-&gt;运算符的作用是：对地址解引用，然后调用成员。a-&gt;和（*a）.等价）</p>
 <ul>
@@ -108,7 +111,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2022/11/20/%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%88%9D%E6%8E%A2/" data-id="clap16a14000034txg2g5ddn2" data-title="" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2022/11/20/%E6%8C%87%E9%92%88%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%88%9D%E6%8E%A2/" data-id="clap1dnfv0000hwtxhr0j2kc2" data-title="" class="article-share-link">Share</a>
       
       
       
