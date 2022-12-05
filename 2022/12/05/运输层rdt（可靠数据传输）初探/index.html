@@ -16,22 +16,22 @@
   <meta name="author" content="hulkb">
   <meta name="keywords" content="">
   
-    <meta name="description" content="const修饰符用于定义一些不能被修改的对象。被定义为const的对象不能被修改，const变量不能被重新赋值，const指针不能修改所指的对象。  对于有关被定义为const对象的操作很复杂。但是只需记住一个原则：不能让被声明为const的对象有被修改的可能性。   举个指针的例子： const int a &#x3D; 1； int* b &#x3D; &amp;a；  上面的第二行操作就是非法的。原因在于：a">
+    <meta name="description" content="运输层可靠数据传输（rdt）在互联网的多层传输模型中，运输层是较为抽象（高层）的层次。运输层不考虑底层的路由，或者是数据比特的具体控制与恢复——这些是运输层之下的网络层和数据链路层的任务。运输层从一个更高的层面，对下层这些操作的结果做出相应的反应，在全局上保证数据的可靠送达。 这里主要整理黑书中3.4.1节对可靠数据传输协议的构建。通过小步迭代的方式，完成一个简单的可靠数据传输模型。（reliab">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自律的const">
-<meta property="og:url" content="http://example.com/2022/11/20/%E8%87%AA%E5%BE%8B%E7%9A%84const/index.html">
+<meta property="og:title" content="运输层rdt（可靠数据传输）初探">
+<meta property="og:url" content="http://example.com/2022/12/05/%E8%BF%90%E8%BE%93%E5%B1%82rdt%EF%BC%88%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%89%E5%88%9D%E6%8E%A2/index.html">
 <meta property="og:site_name" content="hulkb的学习之路">
-<meta property="og:description" content="const修饰符用于定义一些不能被修改的对象。被定义为const的对象不能被修改，const变量不能被重新赋值，const指针不能修改所指的对象。  对于有关被定义为const对象的操作很复杂。但是只需记住一个原则：不能让被声明为const的对象有被修改的可能性。   举个指针的例子： const int a &#x3D; 1； int* b &#x3D; &amp;a；  上面的第二行操作就是非法的。原因在于：a">
+<meta property="og:description" content="运输层可靠数据传输（rdt）在互联网的多层传输模型中，运输层是较为抽象（高层）的层次。运输层不考虑底层的路由，或者是数据比特的具体控制与恢复——这些是运输层之下的网络层和数据链路层的任务。运输层从一个更高的层面，对下层这些操作的结果做出相应的反应，在全局上保证数据的可靠送达。 这里主要整理黑书中3.4.1节对可靠数据传输协议的构建。通过小步迭代的方式，完成一个简单的可靠数据传输模型。（reliab">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-11-20T08:37:50.000Z">
-<meta property="article:modified_time" content="2022-11-20T08:46:45.156Z">
+<meta property="article:published_time" content="2022-12-05T11:53:49.000Z">
+<meta property="article:modified_time" content="2022-12-05T13:51:29.812Z">
 <meta property="article:author" content="hulkb">
-<meta property="article:tag" content="c++基础">
+<meta property="article:tag" content="计算机网络">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>自律的const - hulkb的学习之路</title>
+  <title>运输层rdt（可靠数据传输）初探 - hulkb的学习之路</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle">自律的const</span>
+            <span id="subtitle">运输层rdt（可靠数据传输）初探</span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-20 16:37" pubdate>
-          2022年11月20日 下午
+        <time datetime="2022-12-05 19:53" pubdate>
+          2022年12月5日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          1.9k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          14 分钟
+          17 分钟
         
       </span>
     
@@ -268,76 +268,44 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">自律的const</h1>
+            <h1 style="display: none">运输层rdt（可靠数据传输）初探</h1>
             
             
               <div class="markdown-body">
                 
-                <ul>
-<li><p>const修饰符用于定义一些不能被修改的对象。被定义为const的对象不能被修改，const变量不能被重新赋值，const指针不能修改所指的对象。</p>
-</li>
-<li><p>对于有关被定义为const对象的操作很复杂。但是只需记住一个原则：不能让被声明为const的对象有被修改的可能性。</p>
-</li>
-</ul>
-<p>举个指针的例子：</p>
-<pre><code class="hljs">const int a = 1；
-int* b = &amp;a；
-</code></pre>
-<p>上面的第二行操作就是非法的。原因在于：a已经被声明为const，因此不能有修改a值的行为，但是第二行用普通指针指向a，这个普通指针b提供了修改a的可能性。这是违反原则的，因此编译器不会允许通过。</p>
-<p>反过来说，如果把指针b也声明为const，这两行代码就是正确的。（const指针不允许对指向对象的修改操作，因此，用const指针指向const对象是合法的——这样做并不会提供修改const对象的可能性）</p>
-<p>对于引用，这个原则同样适用。你不能使用普通引用来指向const对象，但可以使用const引用来这么做。例如下面三行代码。</p>
-<pre><code class="hljs">const int a = 1；  //a被定义为const，因此不能修改
-const int &amp; b = a；//正确，受限的const引用b并不提供修改a的机会
-int&amp; c = a；       //错误，不受限制的引用c提供了修改a的可能性
-</code></pre>
-<ul>
-<li><p>另一方面，你可以用const指针或引用来指向非const对象。</p>
-<p>int a &#x3D; 42；      &#x2F;&#x2F;自由的a<br>const int&amp; b &#x3D; a；&#x2F;&#x2F;正确<br>const int* c &#x3D; a；&#x2F;&#x2F;正确</p>
-</li>
-</ul>
-<p>无法通过b和c修改a的值，但是这三行代码可以通过编译。</p>
-<ul>
-<li>顶层const和底层const</li>
-</ul>
-<p>顶层const指的是，指针本身不能被改变；底层const指的是指针所指对象不能被改变。</p>
-<p>前面所说的const指针，指的都是底层const。</p>
-<p>两种const声明方法如下：</p>
-<pre><code class="hljs">int a = 42；
-const int* b = a；//不能通过指针b修改a的值；（底层const）
-int * const c = a；//指针c自身不能修改，也就是永远只能指向a；（顶层const）
-</code></pre>
-<p>可以同时赋予指针顶层和底层const属性</p>
-<p>int a &#x3D; 42；</p>
-<p>const int* const b &#x3D;  a；&#x2F;&#x2F;b只能指向a，同时，不能通过b修改a的值；*</p>
-<p>const也可以修饰引用。和指针不同，引用自身天生是不能被修改的（引用没有办法改变自己指向的对象），因此可以说引用自带顶层const属性。</p>
-<p>当然也可以为引用附加底层const，即声明一个不能修改对象的引用。</p>
-<pre><code class="hljs">int a = 42；
-const int &amp; b = a；//无法通过引用b修改a的值；
-</code></pre>
-<ul>
-<li>const对象必须初始化</li>
-</ul>
-<p>被声明为const的变量是不能被赋值的，因此，它必须要被初始化。一旦初始化后就无法改变它的值。</p>
-<ul>
-<li>const对象仅在文件内有效（不是很理解）</li>
-</ul>
-<p>const对象仅在定义了它的文件中生效。不同文件中的相同const其实都算作不同的对象。</p>
-<p>如果要让const对象在不同文件间共享，则需要在所有文件的对应对象的声明和定义之前都加上extern关键字</p>
-<ul>
-<li>constexpr：修饰的变量在编译阶段就能确定，且运行期间保持不变。</li>
-</ul>
-<p>我的理解是，用constexpr修饰的变量，必须能从阅读代码的过程中确定它的值。</p>
-<p>因此，像下面这样的声明是错误的：</p>
-<pre><code class="hljs">int a = 1；
-...                  //此处省略一堆代码
-constexpr int b = a；//错误，程序没有运行前，你不能确定a的值
-</code></pre>
-<p>即便我们为上面的a加上const声明，仍然是错误的。因为，虽然const能保证此值不变化，但不能保证这个值的初始值固定，例如：</p>
-<pre><code class="hljs">int  a；
-cin &gt;&gt; a；
-const int b = a；    //声明了const变量b
-constexpr int c = b；//错误，程序运行前，你不能确定b的值
-</code></pre>
+                <h1 id="运输层可靠数据传输（rdt）"><a href="#运输层可靠数据传输（rdt）" class="headerlink" title="运输层可靠数据传输（rdt）"></a>运输层可靠数据传输（rdt）</h1><p>在互联网的多层传输模型中，运输层是较为抽象（高层）的层次。运输层不考虑底层的路由，或者是数据比特的具体控制与恢复——这些是运输层之下的网络层和数据链路层的任务。运输层从一个更高的层面，对下层这些操作的结果做出相应的反应，在全局上保证数据的可靠送达。</p>
+<p>这里主要整理黑书中3.4.1节对可靠数据传输协议的构建。通过小步迭代的方式，完成一个简单的可靠数据传输模型。（reliable data transfer）</p>
+<p>首先，考虑最简单的情景：下层的信道完全可靠。</p>
+<p>这种情况下，运输层不需要做什么特别的操作。当上层应用请求运输层发送数据，发送方持续地发送数据包即可，而最终所有的数据包都能正确有序地被接收方接受。</p>
+<p>rdt1.0</p>
+<p>现在为我们的通信模型增加一点挑战：下层的信道偶尔会开小差，数据包有时会出现比特差错。<strong>（为方便区分，我们把比特差错包称为污染包）</strong></p>
+<p>现在情况变得更贴近现实了。面对可能出错的下层信道，我们不能再简单地一股脑发送数据包就完事。（你发“12345”，对方收到的可能是“123口5”。）</p>
+<p>对此，我们加入<strong>停等</strong>机制与<strong>响应</strong>机制。</p>
+<p>对于一段需要发送的数据包，我们不再不管不顾地持续发送，而是每发一个包就停下来，等收到接收方的回应之后，再进行下一次的发送。</p>
+<p>我们规定两种响应包——<strong>ACK</strong>与<strong>NAK</strong>，分别表示顺利收到（acknowledge）与数据出错（negative acknowledge）。如果接收方接收到正确的数据包，就回复ACK；如果接到了污染包，就回复NAK。</p>
+<p>接收方根据回复，来决定是继续发送接下来的数据包，还是重新发送上一个。</p>
+<p><em>这里值得注意的是，我们默认接收方有能力识别出污染包。这是通过运输层之下的层次实现的，主要是通过在数据中插入一些额外的比特校验码之类的操作。</em></p>
+<p>rdt2.0</p>
+<p>现在我们的运输模型已经对数据错误有了一定的抵抗能力。（假如发“12345”，而“4”出错成了“口”，接收方收到“口”之后识别出这是一个污染包，将回应NAK，发送方收到这个NAK后就会重传“4”。）</p>
+<p>但是仍然有一个问题：回复包（ACK与NAK），本质上也是数据包，也有污染的可能性。</p>
+<p>假如回复包出现错误，那么发送方就不能确定接收方究竟有没有接收到正确的数据。例如，接收方成功接受一个数据包，并回复了一个ACK，但是因污染变成了“口”。发送方收到这个“口”以后，无法确定接下来是否要重传。</p>
+<p>解决的办法是<strong>冗余</strong>。对于污染的回复包，发送方一概进行重传。一旦接收到“口”这样的被污染回复包，不考虑它原本是ACK还是NAK，直接重传。</p>
+<p>这样做能保证不出现数据包的遗漏。在接到清晰正确的ACK之前，发送方会一直发送这一个数据包，因此可以100%保证每一个数据包都被正确送达。</p>
+<p>但是，这个“冗余”方案为接收方引入了新的麻烦——接收方无法判断传过来的数据包是重传，还是下一个数据包。如果ACK被污染，会出现重复接收数据包的问题。（我这边一切正常，正确接到“3”以后回复ACK，正准备接收下一个包“4”，结果，因为ACK出错变成了“口”，接到“口”的你二话不说重传了一个“3”。这下好了，我拿到“3”以后，把他当成我要的“4”收下了。）</p>
+<p>对于上面的问题，引入的解决方案非常简单——<strong>序号</strong>。</p>
+<p>只要为每一个数据包，都添加一个额外的数据段，表示相应的数据包的序号，就能解决重复接受的问题。接收方能根据序号来判断传来的数据包是否已经接受过了。（在上面的例子中，对于第二次传来的“3”，接收方根据附加的序号判断出已经接收过“3”，因此不选择收下，而是仅发送一个ACK。这个ACK被发送方收到，发送方于是发送下一个包“4”，传输正确继续。）</p>
+<p>考虑到我们是单个单个发包，这个序号只需要一位<strong>序号位</strong>（二进制“0&#x2F;1”），即可完成区分。（这个细讲起来太麻烦，自行理解。）</p>
+<p>rdt2.1</p>
+<p>在rdt2.1的基础上可以进行进一步的改进。我们取消NAK，用<strong>ACK+序号位</strong>来取代<strong>ACK+NAK</strong>的组合。用ACK+匹配的序号表示原ACK，用ACK+不匹配的序号表示原NAK。</p>
+<p>rdt2.2</p>
+<p>经历了这么多，我们终于通过运输层模型的精妙设计，解决了传输过程中比特出错的问题。</p>
+<p>现在我们让问题进一步贴近现实世界。我们开始考虑丢包。</p>
+<p>丢包是指某个包在传输过程中由于出现问题，导致没有成功传达。（连污染包都没得）</p>
+<p>这个包可能是发送方发送的数据包，也可能是接收方回复的回复包。</p>
+<p>在我们的运输层设计中，我们将出现丢包之后的处理，交给发送方来做。</p>
+<p>具体设计是采用<strong>定时器</strong>。每次发送方发送一个数据包之后，就启动一个定时器。定时器期间收到正确的ACK则关闭此定时器并发送新数据包，启动新定时器。若定时器启动期间一直没有收到正确的ACK，则在定时器结束后重传该数据包，启动新定时器。</p>
+<p><em>重传是一剂良药</em></p>
+<p>rdt3.0</p>
 
                 
               </div>
@@ -350,7 +318,7 @@ constexpr int c = b；//错误，程序运行前，你不能确定b的值
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/c-%E5%9F%BA%E7%A1%80/">#c++基础</a>
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">#计算机网络</a>
       
     </div>
   
@@ -362,8 +330,8 @@ constexpr int c = b；//错误，程序运行前，你不能确定b的值
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>自律的const</div>
-      <div>http://example.com/2022/11/20/自律的const/</div>
+      <div>运输层rdt（可靠数据传输）初探</div>
+      <div>http://example.com/2022/12/05/运输层rdt（可靠数据传输）初探/</div>
     </div>
     <div class="license-meta">
       
@@ -375,7 +343,7 @@ constexpr int c = b；//错误，程序运行前，你不能确定b的值
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月20日</div>
+          <div>2022年12月5日</div>
         </div>
       
       
@@ -407,18 +375,12 @@ constexpr int c = b；//错误，程序运行前，你不能确定b的值
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/12/05/%E8%BF%90%E8%BE%93%E5%B1%82rdt%EF%BC%88%E5%8F%AF%E9%9D%A0%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%EF%BC%89%E5%88%9D%E6%8E%A2/" title="运输层rdt（可靠数据传输）初探">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">运输层rdt（可靠数据传输）初探</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/11/20/c-%E6%8C%87%E9%92%88%E5%92%8C%E5%BC%95%E7%94%A8%E7%AC%A6%E5%8F%B7%E5%9F%BA%E7%A1%80%E7%94%A8%E6%B3%95/" title="c++指针和引用符号基础用法">
-                        <span class="hidden-mobile">c++指针和引用符号基础用法</span>
+                      <a href="/2022/11/20/%E8%87%AA%E5%BE%8B%E7%9A%84const/" title="自律的const">
+                        <span class="hidden-mobile">自律的const</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
