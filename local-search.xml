@@ -8,7 +8,7 @@
     <link href="/2024/02/27/wsl%E8%BF%9E%E6%8E%A5xfce%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
     <url>/2024/02/27/wsl%E8%BF%9E%E6%8E%A5xfce%E5%AE%9E%E7%8E%B0%E5%8F%AF%E8%A7%86%E5%8C%96/</url>
     
-    <content type="html"><![CDATA[<h1 id="xfce-WSL2-配置Ubuntu图形化界面"><a href="#xfce-WSL2-配置Ubuntu图形化界面" class="headerlink" title="xfce+WSL2 配置Ubuntu图形化界面"></a>xfce+WSL2 配置Ubuntu图形化界面</h1><p><a href="https://zhuanlan.zhihu.com/p/150555651">WSL2中使用VcXsrv实现xfce4图形界面+声音传输 - 知乎 (zhihu.com)</a></p><p>打开 “一键”，打开ubuntu。在ubuntu命令行中输入startxfce4</p><p>贴一下自己遇到的坑：在bashrc中设置了display为wsl网络接口地址后，没有用source命令让新的bashrc文件生效，所以一直出错。</p><p>（话说重启WSL竟然不会自动加载这个配置文件吗）</p><p>貌似profile是会被启动加载的那个文件。要想实现开机加载bashrc文件，要把它写到profile中</p><p>成功运行，但是有一堆报错。后续再研究吧。</p><p>设置里用了这一条自动获取，有效</p><p>export DISPLAY&#x3D;$(cat &#x2F;etc&#x2F;resolv.conf | grep nameserver | awk ‘{print $2}’):0</p>]]></content>
+    <content type="html"><![CDATA[<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></table></figure><h1 id="xfce-WSL2-配置Ubuntu图形化界面"><a href="#xfce-WSL2-配置Ubuntu图形化界面" class="headerlink" title="xfce+WSL2 配置Ubuntu图形化界面"></a>xfce+WSL2 配置Ubuntu图形化界面</h1><p><a href="https://zhuanlan.zhihu.com/p/150555651">WSL2中使用VcXsrv实现xfce4图形界面+声音传输 - 知乎 (zhihu.com)</a></p><p>打开 “一键”，打开ubuntu。在ubuntu命令行中输入startxfce4</p><p>贴一下自己遇到的坑：在bashrc中设置了display为wsl网络接口地址后，没有用source命令让新的bashrc文件生效，所以一直出错。</p><p>（话说重启WSL竟然不会自动加载这个配置文件吗）</p><p>貌似profile是会被启动加载的那个文件。要想实现开机加载bashrc文件，要把它写到profile中</p><p>成功运行，但是有一堆报错。后续再研究吧。</p><p>设置里用了这一条自动获取，有效</p><p>export DISPLAY&#x3D;$(cat &#x2F;etc&#x2F;resolv.conf | grep nameserver | awk ‘{print $2}’):0</p>]]></content>
     
     
     
